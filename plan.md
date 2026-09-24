@@ -12,8 +12,8 @@ El detalle de ejecución paso a paso vive en archivos separados, uno por fase:
 
 | Fase | Documento de ejecución | Estado |
 |---|---|---|
-| 0 — Cimientos | [`plan/fase-0-cimientos.md`](plan/fase-0-cimientos.md) | 🟡 Verificado en navegador; falta solo el despliegue en Vercel (0.14) |
-| 1 — Maqueta completa | [`plan/fase-1-maqueta.md`](plan/fase-1-maqueta.md) | Pendiente |
+| 0 — Cimientos | [`plan/fase-0-cimientos.md`](plan/fase-0-cimientos.md) | ✅ Completada (2026-09-24) |
+| 1 — Maqueta completa | [`plan/fase-1-maqueta.md`](plan/fase-1-maqueta.md) | 🟡 En progreso |
 | 2 — Sanity | [`plan/fase-2-sanity.md`](plan/fase-2-sanity.md) | Pendiente |
 | 3 — Conversión y SEO | [`plan/fase-3-conversion-seo.md`](plan/fase-3-conversion-seo.md) | Pendiente |
 | 4 — Lanzamiento | Sin detallar todavía | Pendiente |

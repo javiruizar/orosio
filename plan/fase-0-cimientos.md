@@ -1082,14 +1082,17 @@ git push -u origin main
 
       → `main` sincronizado con `origin/main`. ✅
 
-- [ ] En [vercel.com](https://vercel.com), "Add New → Project", importar el repositorio.
+- [x] En [vercel.com](https://vercel.com), "Add New → Project", importar el repositorio.
       Todos los ajustes por defecto son correctos: Vercel detecta Next.js solo.
-- [ ] Esperar al despliegue y abrir la URL `*.vercel.app` que devuelve.
-- [ ] Repetir sobre esa URL las comprobaciones de 0.13.
+      → Hecho por Javier (2026-09-24). ✅
+- [x] Esperar al despliegue y abrir la URL `*.vercel.app` que devuelve.
+      → Desplegado. ✅
+- [x] Repetir sobre esa URL las comprobaciones de 0.13.
+      → Verificado por Javier en producción (2026-09-24). ✅
 - [ ] Anotar la URL de producción en este documento:
 
 ```
-URL de producción: ______________________________
+URL de producción: [PENDIENTE: pegar la URL de *.vercel.app]
 ```
 
 ---
@@ -1116,8 +1119,6 @@ No dar la fase por terminada hasta que todo esto se cumpla:
 - [x] Todos los enlaces internos pasan por `routes` de `src/lib/routes.ts`.
       → Verificado con grep: ningún `href` literal fuera de `not-found.tsx`. ✅
 - [x] Commit hecho y subido a GitHub (`javiruizar/orosio`, rama `main`, sincronizada con
-      `origin/main`). Despliegue en Vercel: pendiente (ver 0.14).
-- [ ] Marcada la fase 0 como completada en la tabla de [`../plan.md`](../plan.md).
-      *(No se marca como completada del todo: solo queda pendiente el despliegue en Vercel de
-      0.14 — todas las comprobaciones de navegador ya están hechas. La tabla de `plan.md` refleja
-      este estado intermedio.)*
+      `origin/main`). Despliegue en Vercel hecho y verificado por Javier (2026-09-24); solo falta
+      anotar la URL exacta en 0.14. ✅
+- [x] Marcada la fase 0 como completada en la tabla de [`../plan.md`](../plan.md).
