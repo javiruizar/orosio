@@ -28,12 +28,24 @@ claramente equivocado, **parar y avisar** en vez de improvisar.
   paso de cómo comprobarla yo mismo: qué abrir, qué mirar o hacer exactamente,
   y qué resultado esperar para considerarla superada.
 
+## Commits y push
+
+**No hagas `git commit` ni `git push` por tu cuenta.** Cuando el trabajo de una sesión esté listo
+y verificado, haz `git add` de los ficheros que correspondan (código y/o ficheros de plan ya
+aprobados) y dime que haga yo mismo el commit y el push. Esta regla se añadió el 2026-09-24 al
+cerrar la fase 1; los commits de las fases 0 y 1 ya estaban hechos antes de la regla y no hay que
+deshacerlos.
+
 ## Estado actual (2026-09-24)
 
-- **Fase 0 — Cimientos**: código completo y subido a GitHub (`origin` = `javiruizar/orosio`,
-  rama `main`). `build` y `lint` pasan. Pendiente: comprobaciones en navegador (0.13), despliegue
-  en Vercel (0.14) y lista de cierre (0.15).
-- **Fases 1-3**: sin empezar. Fases 4 (lanzamiento) y 5 (calendarios/channel manager) sin detallar.
+- **Fase 0 — Cimientos**: ✅ completada. Código en GitHub (`origin` = `javiruizar/orosio`, rama
+  `main`) y desplegado en Vercel, verificado por Javier.
+- **Fase 1 — Maqueta completa**: ✅ completada. Las 13 páginas, en ES/EN, con los 5 apartamentos
+  provisionales, guía de la zona, FAQ y formularios maquetados (sin envío real, eso es fase 3).
+  Verificado por mí de forma objetiva (build, lint, rutas, contraste, `alt`, interactividad
+  probada con clics/teclas reales simulados en Chrome) y por Javier en navegador y en producción.
+- **Fase 2 — Sanity**: siguiente fase a ejecutar.
+- **Fase 3**: sin empezar. Fases 4 (lanzamiento) y 5 (calendarios/channel manager) sin detallar.
 - Las fases van **en orden**: no empezar una sin cerrar y verificar la anterior.
 
 ## Stack
@@ -92,21 +104,34 @@ src/
 │     └─ page.tsx           home (marcador temporal hasta la fase 1)
 ├─ components/
 │  ├─ layout/               Header, Footer, LocaleSwitcher, MobileNav
-│  └─ ui/                   Container, Section, Button, Card
-│     (fase 1 añade ui/heading, ui/accordion, ui/breadcrumbs, apartments/, sections/, forms/)
+│  ├─ ui/                   Container, Section, Button, Card, Heading, Accordion, Breadcrumbs
+│  ├─ apartments/           ApartmentCard, AmenitiesList, Gallery (lightbox)
+│  ├─ sections/             ValueProps, DirectBooking, FinalCta
+│  └─ forms/                ContactForm (fase 1: solo maquetación, sin envío real)
+├─ data/                    contenido provisional bilingüe (fase 1; se borra/migra en fase 2):
+│                            apartamentos.ts, equipamiento.ts, puntos-interes.ts
 ├─ i18n/
 │  ├─ config.ts             locales, defaultLocale, localeHtmlLang, isLocale()
 │  ├─ get-dictionary.ts     carga server-only; el tipo Dictionary se deriva de es.json
 │  └─ dictionaries/         es.json, en.json
 └─ lib/
    ├─ cn.ts
-   └─ routes.ts             ÚNICA fuente de URLs internas
+   └─ routes.ts             ÚNICA fuente de URLs internas; también `localizedPathname()`
+                             (traduce una ruta entre idiomas, ver nota de LocaleSwitcher abajo)
 plan.md, plan/              planes (ver reglas arriba)
+scripts/generate-placeholders.mjs   genera public/placeholder/ (25 SVG de relleno)
 ```
 
-Previstos en fases posteriores: `src/data/` (datos provisionales, fase 1), `scripts/`
-(placeholders, seed), `public/placeholder/`, `sanity/` + `sanity.config.ts` en la raíz y
-`src/lib/sanity/` (fase 2), `docs/`.
+Previstos en fases posteriores: `scripts/seed-sanity.mjs`, `sanity/` + `sanity.config.ts` en la
+raíz y `src/lib/sanity/` (fase 2), `docs/`.
+
+**`LocaleSwitcher` (nota importante, Next.js 16)**: en páginas estáticas servidas mediante
+`rewrites` (las inglesas), `usePathname()` puede devolver permanentemente la ruta interna en
+español en una carga completa de página, sin autocorregirse (contradice el matiz de la
+documentación oficial sobre "Avoid hydration mismatch with rewrites"; verificado con Chrome real).
+Por eso el cambio de idioma no confía en el `href` ya renderizado: recalcula el destino con
+`window.location.pathname` en el `onClick` y navega con el router. Si se toca este componente,
+no revertir a leer solo `usePathname()`.
 
 ## Convenciones de código
 

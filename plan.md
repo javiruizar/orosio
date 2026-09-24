@@ -13,7 +13,7 @@ El detalle de ejecución paso a paso vive en archivos separados, uno por fase:
 | Fase | Documento de ejecución | Estado |
 |---|---|---|
 | 0 — Cimientos | [`plan/fase-0-cimientos.md`](plan/fase-0-cimientos.md) | ✅ Completada (2026-09-24) |
-| 1 — Maqueta completa | [`plan/fase-1-maqueta.md`](plan/fase-1-maqueta.md) | 🟡 Código completo; pendiente repaso visual y despliegue |
+| 1 — Maqueta completa | [`plan/fase-1-maqueta.md`](plan/fase-1-maqueta.md) | ✅ Completada (2026-09-24) |
 | 2 — Sanity | [`plan/fase-2-sanity.md`](plan/fase-2-sanity.md) | Pendiente |
 | 3 — Conversión y SEO | [`plan/fase-3-conversion-seo.md`](plan/fase-3-conversion-seo.md) | Pendiente |
 | 4 — Lanzamiento | Sin detallar todavía | Pendiente |
@@ -30,6 +30,10 @@ El detalle de ejecución paso a paso vive en archivos separados, uno por fase:
    avisar** en lugar de improvisar una alternativa.
 5. Al terminar cada tarea, marcar su `[x]` en el documento de la fase y actualizar la tabla de
    arriba.
+6. **No hacer `git commit` ni `git push` por cuenta propia.** Cuando el trabajo de una sesión esté
+   listo y verificado, hacer `git add` de los ficheros que correspondan y pedirle a Javier que
+   haga él mismo el commit y el push. (Regla añadida el 2026-09-24, al cerrar la fase 1; los
+   commits de las fases 0 y 1 ya están hechos y no hay que deshacerlos.)
 
 ---
 

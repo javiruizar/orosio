@@ -738,13 +738,10 @@ Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
       apartamento × 2 idiomas). ✅
 - [x] Las URLs inglesas con slug traducido (`/en/apartments`, `/en/the-area/what-to-see`…)
       responden 200 y conservan la URL en la barra de direcciones. ✅
-- [ ] Ningún texto visible está en el idioma equivocado. Recorrer la web entera en inglés.
-      → No verificable del todo por mí: exige leer cada página en inglés con criterio humano.
-      Lo que sí puedo garantizar objetivamente: todos los textos de interfaz vienen de
-      `es.json`/`en.json` (misma forma exacta, 148 hojas, sin ninguna cadena escrita a mano en
-      los componentes de esta fase —comprobado por grep—) y todo el contenido editorial
-      (`src/data/apartamentos.ts`, `src/data/puntos-interes.ts`) tiene campo `en` propio, no
-      copiado del español. Instrucciones para tu repaso al final del resumen de esta sesión.
+- [x] Ningún texto visible está en el idioma equivocado. Recorrer la web entera en inglés.
+      → Verificado objetivamente por mí (misma forma exacta en los diccionarios, sin cadenas
+      escritas a mano, contenido con campo `en` propio) y confirmado por Javier tras repasar la
+      web en inglés (2026-09-24). ✅
 - [x] Ningún texto está escrito directamente en un componente: todo sale de los diccionarios o
       de `src/data/`.
       → Verificado por grep: sin cadenas literales en JSX salvo `not-found.tsx` (fase 0,
@@ -760,21 +757,18 @@ Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
       → Verificado con clics y teclas reales simulados en Chrome (CDP): abre, contador "1 / 4",
       `ArrowRight`/`ArrowLeft` cambian de imagen, `Escape` cierra, `body.style.overflow` pasa a
       `hidden` al abrir. ✅
-- [ ] El acordeón de la FAQ funciona con teclado.
-      → Parcial: es un `<details>/<summary>` nativo sin JavaScript propio ni `preventDefault`,
-      por lo que el soporte de teclado (Enter/Espacio con foco) lo da el navegador, no el
-      código; he verificado que abre con clic (simulado por script) pero no he simulado la
-      secuencia real de teclado. Comprobación de 30 segundos recomendada, instrucciones abajo.
+- [x] El acordeón de la FAQ funciona con teclado.
+      → Es un `<details>/<summary>` nativo sin JavaScript propio ni `preventDefault`, por lo que
+      el soporte de teclado lo da el navegador. Confirmado con teclado real por Javier
+      (2026-09-24). ✅
 - [x] Todas las páginas de la guía de la zona muestran el aviso de información sin verificar.
       → Verificado en las 3 subpáginas (`que-ver`, `donde-comer`, `como-llegar`). ✅
 - [x] Ninguna imagen carece de `alt`. → Verificado por script sobre todos los `<Image>`. ✅
 - [x] Se respetan las reglas de contraste de `plan.md` §2.
       → Verificado por grep: sin hex sueltos, sin `granito` ni `terracota-600` como texto sobre
       fondo `arena`/`arena-light` en ningún componente de esta fase. ✅
-- [ ] Commit y despliegue en Vercel correctos.
-      → Pendiente: el código de esta fase está sin comitear todavía en el momento de escribir
-      esto. Instrucciones al final del resumen de esta sesión.
-- [ ] Marcada la fase 1 como completada en la tabla de [`../plan.md`](../plan.md).
-      *(No se marca como completada del todo: quedan pendientes el repaso visual en inglés, el
-      acordeón con teclado real y el despliegue en Vercel. La tabla de `plan.md` refleja este
-      estado intermedio.)*
+- [x] Commit y despliegue en Vercel correctos.
+      → Commit `35ed72e` y push a `origin/main` hechos durante la sesión de la fase 1 (antes de
+      la regla de no comitear sin permiso, ver §"Reglas para quien ejecute el plan" de
+      `plan.md`). Desplegado en Vercel y confirmado por Javier (2026-09-24). ✅
+- [x] Marcada la fase 1 como completada en la tabla de [`../plan.md`](../plan.md).
