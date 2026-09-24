@@ -6,12 +6,14 @@ import { useState } from "react";
 
 export function MobileNav({
   links,
+  navLabel,
   openLabel,
   closeLabel,
   ctaHref,
   ctaLabel,
 }: {
   links: { href: string; label: string }[];
+  navLabel: string;
   openLabel: string;
   closeLabel: string;
   ctaHref: string;
@@ -35,7 +37,7 @@ export function MobileNav({
 
       {open && (
         <div className="absolute left-0 right-0 top-16 border-b border-arena bg-cal px-5 pb-6 pt-2 shadow-lg">
-          <nav className="flex flex-col" aria-label="Principal móvil">
+          <nav className="flex flex-col" aria-label={navLabel}>
             {links.map((link) => (
               <Link
                 key={link.href}

@@ -11,7 +11,9 @@
     "cta": "Ver disponibilidad",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
-    "skipToContent": "Saltar al contenido"
+    "skipToContent": "Saltar al contenido",
+    "navLabel": "Principal",
+    "mobileNavLabel": "Principal móvil"
   },
   "footer": {
     "tagline": "Cinco apartamentos en el centro de Pozoblanco, en pleno valle de Los Pedroches.",
@@ -29,6 +31,168 @@
   },
   "common": {
     "brand": "Apartamentos Orosio",
-    "city": "Pozoblanco, Córdoba"
+    "city": "Pozoblanco, Córdoba",
+    "breadcrumbLabel": "Migas de pan"
+  },
+  "home": {
+    "heroTitle": "Apartamentos en el corazón de Los Pedroches",
+    "heroSubtitle": "Cinco apartamentos reformados en el centro de Pozoblanco, pensados tanto para una escapada a la dehesa como para una estancia de trabajo.",
+    "heroCta": "Ver apartamentos",
+    "heroCtaSecondary": "Consultar disponibilidad",
+    "valuesTitle": "Por qué Orosio",
+    "values": [
+      {
+        "title": "En el centro de Pozoblanco",
+        "text": "A pie de comercios, bares, el hospital comarcal y los polígonos. Sin necesidad de coger el coche para todo."
+      },
+      {
+        "title": "Cocina independiente",
+        "text": "Equipada de verdad, no un rincón con microondas. Pensada para estancias de varios días."
+      },
+      {
+        "title": "Reserva directa sin comisiones",
+        "text": "El mismo apartamento, mejor precio que en las plataformas. Lo que te ahorras no se lo lleva un intermediario."
+      },
+      {
+        "title": "Trato directo con el propietario",
+        "text": "Sin centralitas ni respuestas automáticas. Escribes y te contesta quien tiene las llaves."
+      }
+    ],
+    "apartmentsTitle": "Nuestros apartamentos",
+    "apartmentsSubtitle": "Cinco apartamentos de un dormitorio con cocina independiente, todos en el centro.",
+    "apartmentsCta": "Ver los cinco apartamentos",
+    "directTitle": "Reserva directa: el mismo apartamento, mejor precio",
+    "directText": "Cuando reservas por Booking o Airbnb, una parte de lo que pagas se queda en la plataforma. Reservando aquí ese margen se queda entre tú y nosotros.",
+    "directPoints": [
+      "Mejor precio que en las plataformas",
+      "Flexibilidad para acordar horarios de entrada y salida",
+      "Trato directo por teléfono o WhatsApp"
+    ],
+    "directCta": "Solicitar reserva directa",
+    "zoneTitle": "Los Pedroches, más cerca de lo que crees",
+    "zoneText": "Dehesa de encinas hasta donde alcanza la vista, pueblos de granito, castillos y el mejor ibérico de bellota de Córdoba. Pozoblanco es la puerta de entrada al valle.",
+    "zoneCta": "Descubrir la zona",
+    "finalCtaTitle": "¿Ya sabes cuándo vienes?",
+    "finalCtaText": "Cuéntanos tus fechas y te confirmamos disponibilidad y precio.",
+    "finalCtaButton": "Consultar disponibilidad"
+  },
+  "apartments": {
+    "title": "Apartamentos",
+    "intro": "Cinco apartamentos de un dormitorio con cocina independiente en el centro de Pozoblanco. Todos con la misma distribución y el mismo equipamiento.",
+    "from": "Desde",
+    "perNight": "por noche",
+    "viewDetail": "Ver apartamento",
+    "guests": "huéspedes",
+    "bedrooms": "dormitorio",
+    "bedroomsPlural": "dormitorios",
+    "bathrooms": "baño",
+    "bathroomsPlural": "baños",
+    "surface": "m²"
+  },
+  "apartment": {
+    "backToList": "Todos los apartamentos",
+    "aboutTitle": "El apartamento",
+    "amenitiesTitle": "Equipamiento",
+    "galleryTitle": "Galería",
+    "bookTitle": "Reservar este apartamento",
+    "bookDirect": "Solicitar reserva directa",
+    "bookBooking": "Ver en Booking",
+    "bookAirbnb": "Ver en Airbnb",
+    "bookPending": "Estamos terminando de publicar este apartamento en las plataformas. Mientras tanto, escríbenos y te confirmamos disponibilidad.",
+    "licence": "Registro de Turismo de Andalucía",
+    "licencePending": "Número de registro pendiente de publicación.",
+    "galleryOpen": "Ampliar imagen",
+    "galleryClose": "Cerrar",
+    "galleryPrev": "Imagen anterior",
+    "galleryNext": "Imagen siguiente"
+  },
+  "zone": {
+    "title": "La zona",
+    "intro": "Pozoblanco es la capital de Los Pedroches, un valle de dehesa al norte de la provincia de Córdoba. Esto es lo que puedes hacer si vienes unos días.",
+    "seeTitle": "Qué ver",
+    "seeIntro": "Lo que merece la pena en el valle y alrededores.",
+    "eatTitle": "Dónde comer",
+    "eatIntro": "Los Pedroches es tierra de ibérico de bellota y de guisos de cuchara.",
+    "getThereTitle": "Cómo llegar",
+    "getThereIntro": "Pozoblanco está bien conectado por carretera con Córdoba, Madrid y Extremadura.",
+    "readMore": "Leer más",
+    "unverified": "Información orientativa pendiente de verificar."
+  },
+  "book": {
+    "title": "Reservar",
+    "intro": "Cuéntanos tus fechas y te respondemos con disponibilidad y precio. También puedes reservar en las plataformas de siempre.",
+    "directTitle": "Reserva directa",
+    "directText": "Es la opción más barata para ti y la que nos permite ser flexibles con los horarios.",
+    "channelsTitle": "O reserva en las plataformas",
+    "channelsText": "Si prefieres la comodidad de reservar donde ya tienes cuenta, también estamos allí.",
+    "comparisonTitle": "Qué cambia según dónde reserves",
+    "comparisonDirect": "Reserva directa",
+    "comparisonPlatforms": "Booking / Airbnb",
+    "comparisonRows": [
+      { "label": "Precio", "direct": "El más bajo", "platforms": "Incluye la comisión de la plataforma" },
+      { "label": "Horarios de entrada y salida", "direct": "Negociables", "platforms": "Los fijados en el anuncio" },
+      { "label": "Atención", "direct": "Directa con el propietario", "platforms": "A través de la plataforma" },
+      { "label": "Pago", "direct": "Acordado contigo", "platforms": "Según la plataforma" }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "intro": "Escríbenos y te contestamos lo antes posible. Si prefieres, también puedes llamarnos o mandarnos un WhatsApp.",
+    "formTitle": "Escríbenos",
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "dates": "Fechas aproximadas",
+    "guests": "Nº de huéspedes",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "required": "Campo obligatorio",
+    "placeholderName": "Cómo te llamas",
+    "placeholderEmail": "tu@email.com",
+    "placeholderPhone": "Opcional",
+    "placeholderDates": "Por ejemplo: del 12 al 15 de abril",
+    "placeholderMessage": "Cuéntanos lo que necesites saber",
+    "directTitle": "Contacto directo",
+    "whatsapp": "Escribir por WhatsApp",
+    "notWorking": "El formulario todavía no está conectado. Se activa en la fase 3."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "intro": "Lo que más nos preguntan antes de reservar.",
+    "items": [
+      {
+        "q": "¿A qué hora puedo entrar y salir?",
+        "a": "La entrada es a partir de las 16:00 y la salida antes de las 11:00. Si reservas directamente con nosotros podemos ajustar los horarios según la ocupación."
+      },
+      {
+        "q": "¿Hay que pagar fianza?",
+        "a": "Pendiente de confirmar. Lo indicaremos aquí antes de abrir las reservas directas."
+      },
+      {
+        "q": "¿Se admiten mascotas?",
+        "a": "Pendiente de confirmar."
+      },
+      {
+        "q": "¿Hay wifi?",
+        "a": "Sí, todos los apartamentos tienen wifi incluido en el precio."
+      },
+      {
+        "q": "¿Hay dónde aparcar?",
+        "a": "Pendiente de confirmar."
+      },
+      {
+        "q": "¿Se puede fumar?",
+        "a": "No. Todos los apartamentos son de no fumadores."
+      },
+      {
+        "q": "¿Puedo reservar para una sola noche?",
+        "a": "Pendiente de confirmar la estancia mínima por temporada."
+      },
+      {
+        "q": "¿Qué pasa si tengo que cancelar?",
+        "a": "La política de cancelación está pendiente de definir para la reserva directa. En Booking y Airbnb se aplica la que figure en cada anuncio."
+      }
+    ],
+    "pendingNote": "Algunas respuestas están pendientes de confirmar. Se completarán antes de publicar la web."
   }
 }

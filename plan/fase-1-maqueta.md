@@ -33,7 +33,7 @@ Dos advertencias:
 Dos problemas detectados en el código de la fase 0 que esta fase debe corregir de paso, porque
 las páginas nuevas los harían visibles:
 
-- [ ] **`LocaleSwitcher` no traduce el slug.** Hoy sustituye solo el primer segmento de la ruta
+- [x] **`LocaleSwitcher` no traduce el slug.** Hoy sustituye solo el primer segmento de la ruta
       (`/es/xxx` → `/en/xxx`), lo que rompe en cuanto los slugs difieren entre idiomas: desde
       `/en/apartments` llevaría a `/es/apartments` (404, el slug español es `apartamentos`), y
       desde `/es/la-zona` a `/en/la-zona` (404, el slug inglés es `the-area`). Hay que reescribir
@@ -41,18 +41,29 @@ las páginas nuevas los harían visibles:
       actual y use `routes.ts` para construir la URL en el idioma destino, no una sustitución de
       texto. Si la ruta no se puede mapear (por ejemplo, una página 404), caer a la home del
       idioma destino en lugar de a una URL rota.
-- [ ] **Textos de interfaz escritos a mano en español.** `aria-label="Principal"` (en
+      → Hecho: `localizedPathname()` en `src/lib/routes.ts` reconoce la página actual por su
+      forma y reconstruye la URL con `routes.ts`. **Hallazgo adicional (2026-09-24)**: en
+      Next.js 16, con páginas estáticas servidas mediante `rewrites`, `usePathname()` puede
+      devolver permanentemente la ruta interna en español en una carga completa de página, sin
+      llegar a autocorregirse (contradice el matiz de la documentación oficial, verificado con
+      Chrome real vía CDP). Por eso el cambio de idioma no se resuelve con el `href` estático:
+      se recalcula el destino con `window.location.pathname` (siempre exacto) en el `onClick` y
+      se navega con el router. Verificado con clics reales simulados en varias páginas y
+      direcciones (listado ↔ ficha ↔ subpágina de zona, es↔en). ✅
+- [x] **Textos de interfaz escritos a mano en español.** `aria-label="Principal"` (en
       `header.tsx`) y `aria-label="Principal móvil"` (en `mobile-nav.tsx`) están fijos en español
       y se ven también en `/en`, incumpliendo la regla de esta fase de que ningún texto salga
       directamente de un componente. Añadir las claves correspondientes (p. ej.
       `header.navLabel`, `header.mobileNavLabel`) a `es.json` y `en.json` y usarlas en vez del
       texto literal.
+      → Hecho: claves `header.navLabel` / `header.mobileNavLabel` añadidas a ambos diccionarios
+      y usadas en `header.tsx` / `mobile-nav.tsx`. ✅
 
 ---
 
 ## 1.1 URLs en inglés mediante rewrites
 
-- [ ] **Sustituir por completo** `next.config.ts` por:
+- [x] **Sustituir por completo** `next.config.ts` por:
 
 ```ts
 import type { NextConfig } from "next";
@@ -84,14 +95,16 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 ```
 
-- [ ] Verificar después de crear las páginas que `/en/apartments` responde 200 y que la barra de
+- [x] Verificar después de crear las páginas que `/en/apartments` responde 200 y que la barra de
       direcciones sigue mostrando `/en/apartments`.
+      → Verificado con `curl` sobre la build de producción: 200, sin redirección, en las 13
+      rutas inglesas con slug traducido. ✅
 
 ---
 
 ## 1.2 Datos provisionales de los apartamentos
 
-- [ ] Crear `src/data/apartamentos.ts`:
+- [x] Crear `src/data/apartamentos.ts`:
 
 ```ts
 import type { Locale } from "@/i18n/config";
@@ -179,7 +192,7 @@ export function getApartamento(slug: string) {
 }
 ```
 
-- [ ] Crear `src/data/equipamiento.ts`:
+- [x] Crear `src/data/equipamiento.ts`:
 
 ```ts
 import {
@@ -218,7 +231,7 @@ export const equipamiento: Record<
 Se generan SVG de color plano con el nombre encima. Son ligeros, no requieren descargas externas
 y dejan claro a simple vista que son provisionales.
 
-- [ ] Crear `scripts/generate-placeholders.mjs`:
+- [x] Crear `scripts/generate-placeholders.mjs`:
 
 ```js
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -263,19 +276,19 @@ for (const [name, label, w, h] of singles) {
 console.log("Placeholders generados en public/placeholder");
 ```
 
-- [ ] Añadir el script a `package.json`, dentro de `"scripts"`:
+- [x] Añadir el script a `package.json`, dentro de `"scripts"`:
 
 ```json
 "placeholders": "node scripts/generate-placeholders.mjs"
 ```
 
-- [ ] Ejecutarlo:
+- [x] Ejecutarlo:
 
 ```bash
 npm run placeholders
 ```
 
-- [ ] Comprobar que `public/placeholder/` contiene 25 archivos SVG.
+- [x] Comprobar que `public/placeholder/` contiene 25 archivos SVG. → Verificado (25). ✅
 
 **Nota**: al ser SVG locales no hace falta configurar `remotePatterns` en `next.config.ts`.
 Usar siempre `next/image` con `width` y `height` explícitos, o `fill` con un contenedor
@@ -285,7 +298,7 @@ Usar siempre `next/image` con `width` y `height` explícitos, o `fill` con un co
 
 ## 1.4 Ampliar los diccionarios
 
-- [ ] Añadir a `src/i18n/dictionaries/es.json` estas claves de primer nivel, junto a las que ya
+- [x] Añadir a `src/i18n/dictionaries/es.json` estas claves de primer nivel, junto a las que ya
       existen de la fase 0:
 
 ```json
@@ -454,7 +467,7 @@ Usar siempre `next/image` con `width` y `height` explícitos, o `fill` con un co
 }
 ```
 
-- [ ] Traducir **todas** esas claves en `src/i18n/dictionaries/en.json`, manteniendo exactamente
+- [x] Traducir **todas** esas claves en `src/i18n/dictionaries/en.json`, manteniendo exactamente
       la misma estructura, el mismo orden y el mismo número de elementos en los arrays.
       El inglés debe ser británico y natural, no traducción literal. Ejemplos de referencia para
       el tono:
@@ -464,7 +477,9 @@ Usar siempre `next/image` con `width` y `height` explícitos, o `fill` con un co
   - `directTitle`: "Book direct: same apartment, better price"
   - `zoneTitle`: "Los Pedroches is closer than you think"
 
-- [ ] Tras editar los dos archivos, comprobar que tienen el mismo conjunto de claves:
+- [x] Tras editar los dos archivos, comprobar que tienen el mismo conjunto de claves.
+      → Verificado por script: misma forma exacta, 148 hojas (incluye arrays, mismo nº de
+      elementos). ✅
 
 ```bash
 node -e "const a=require('./src/i18n/dictionaries/es.json'),b=require('./src/i18n/dictionaries/en.json');const k=o=>Object.keys(o).flatMap(x=>typeof o[x]==='object'&&!Array.isArray(o[x])?Object.keys(o[x]).map(y=>x+'.'+y):[x]).sort();const A=k(a),B=k(b);console.log(JSON.stringify(A)===JSON.stringify(B)?'OK: mismas claves':'DIFERENCIAS:\n'+A.filter(x=>!B.includes(x)).map(x=>'falta en en: '+x).concat(B.filter(x=>!A.includes(x)).map(x=>'sobra en en: '+x)).join('\n'))"
@@ -556,16 +571,16 @@ placeholder:text-granito focus:border-terracota-600`.
 
 **Tareas:**
 
-- [ ] `ui/heading.tsx`
-- [ ] `ui/accordion.tsx`
-- [ ] `ui/breadcrumbs.tsx`
-- [ ] `apartments/apartment-card.tsx`
-- [ ] `apartments/amenities-list.tsx`
-- [ ] `apartments/gallery.tsx`
-- [ ] `sections/value-props.tsx`
-- [ ] `sections/direct-booking.tsx`
-- [ ] `sections/final-cta.tsx`
-- [ ] `forms/contact-form.tsx`
+- [x] `ui/heading.tsx`
+- [x] `ui/accordion.tsx`
+- [x] `ui/breadcrumbs.tsx`
+- [x] `apartments/apartment-card.tsx`
+- [x] `apartments/amenities-list.tsx`
+- [x] `apartments/gallery.tsx`
+- [x] `sections/value-props.tsx`
+- [x] `sections/direct-booking.tsx`
+- [x] `sections/final-cta.tsx`
+- [x] `forms/contact-form.tsx`
 
 ---
 
@@ -585,7 +600,7 @@ export default async function XPage({ params }: { params: Promise<{ locale: stri
 Recordatorio: `params` es una promesa en Next.js 15.
 
 ### `page.tsx` — Home
-- [ ] Secciones en este orden:
+- [x] Secciones en este orden:
   1. **Hero**: fondo con `public/placeholder/hero.svg` a ancho completo, alto `min-h-[70vh]`,
      overlay `bg-carbon/45`, texto blanco centrado, `heroTitle` como `<h1>`, `heroSubtitle`,
      y dos botones: primario hacia apartamentos y secundario (blanco, borde blanco) hacia reservar.
@@ -598,11 +613,11 @@ Recordatorio: `params` es una promesa en Next.js 15.
   6. **FinalCta**.
 
 ### `apartamentos/page.tsx` — Listado
-- [ ] `Breadcrumbs` → `Heading` con `apartments.title` e `intro` → rejilla
+- [x] `Breadcrumbs` → `Heading` con `apartments.title` e `intro` → rejilla
       `grid gap-8 md:grid-cols-2 lg:grid-cols-3` con las 5 `ApartmentCard` → `FinalCta`.
 
 ### `apartamentos/[slug]/page.tsx` — Ficha
-- [ ] Implementar `generateStaticParams` devolviendo el producto cartesiano de locales y slugs:
+- [x] Implementar `generateStaticParams` devolviendo el producto cartesiano de locales y slugs:
 
 ```tsx
 export function generateStaticParams() {
@@ -612,8 +627,9 @@ export function generateStaticParams() {
 }
 ```
 
-- [ ] Si `getApartamento(slug)` devuelve `undefined`, llamar a `notFound()`.
-- [ ] Estructura:
+- [x] Si `getApartamento(slug)` devuelve `undefined`, llamar a `notFound()`.
+      → Verificado: `/es/apartamentos/no-existe` responde 404. ✅
+- [x] Estructura:
   1. `Breadcrumbs`: inicio / apartamentos / nombre.
   2. `<h1>` con el nombre y, debajo, la fila de datos (plazas, dormitorios, baños, m²).
   3. `Gallery`.
@@ -629,13 +645,15 @@ export function generateStaticParams() {
   7. `FinalCta`.
 
 ### `la-zona/page.tsx` — Índice de la guía
-- [ ] `Heading` con `zone.title` y `zone.intro`, más tres `Card` enlazando a las subpáginas, cada
+- [x] `Heading` con `zone.title` y `zone.intro`, más tres `Card` enlazando a las subpáginas, cada
       una con su imagen (`zona-que-ver.svg`, `zona-donde-comer.svg`, `zona-como-llegar.svg`),
       título y `readMore`.
 
 ### `la-zona/que-ver/page.tsx`
-- [ ] Contenido provisional. **Todo el bloque lleva el aviso `zone.unverified` visible en un
+- [x] Contenido provisional. **Todo el bloque lleva el aviso `zone.unverified` visible en un
       recuadro `bg-arena` al principio de la página**, porque los datos no están comprobados.
+      → Contenido en `src/data/puntos-interes.ts` (bilingüe, con distancias marcadas
+      `⚠️ VERIFICAR` salvo la dehesa a 0 km). Aviso verificado presente en el HTML servido. ✅
 
 Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
 
@@ -648,14 +666,14 @@ Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
 | Córdoba capital | Mezquita-Catedral, Judería y Alcázar, en excursión de un día. | ⚠️ ~70 km |
 
 ### `la-zona/donde-comer/page.tsx`
-- [ ] Contenido provisional, con el mismo aviso de no verificado. **No inventar nombres de
+- [x] Contenido provisional, con el mismo aviso de no verificado. **No inventar nombres de
       restaurantes concretos**: hablar de producto y tipo de local, no de establecimientos.
       Temas: ibérico de bellota con Denominación de Origen Los Pedroches, quesos y lácteos de la
       comarca, guisos de cuchara, y la recomendación de comprar en el mercado y cocinar en el
       apartamento (que enlaza con el argumento de la cocina independiente).
 
 ### `la-zona/como-llegar/page.tsx`
-- [ ] Contenido provisional, con aviso de no verificado. Bloques: **en coche** desde Córdoba,
+- [x] Contenido provisional, con aviso de no verificado. Bloques: **en coche** desde Córdoba,
       Madrid y Extremadura (⚠️ VERIFICAR carreteras y tiempos); **en autobús**, mencionando que
       hay línea con Córdoba sin dar horarios; **en tren**, indicando que la estación más práctica
       es Córdoba y desde allí se continúa por carretera (⚠️ VERIFICAR).
@@ -664,7 +682,7 @@ Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
       cookies y complica el consentimiento RGPD de la fase 3.
 
 ### `reservar/page.tsx`
-- [ ] `Heading` con `book.title` e `intro`, luego:
+- [x] `Heading` con `book.title` e `intro`, luego:
   1. Bloque "Reserva directa" con el `ContactForm`.
   2. Bloque "O reserva en las plataformas": como todas las URLs son `null`, mostrar de momento
      el texto `apartment.bookPending`. Dejar el código preparado para listar los apartamentos con
@@ -673,15 +691,15 @@ Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
      apiladas en lugar de una tabla con scroll horizontal.
 
 ### `contacto/page.tsx`
-- [ ] Dos columnas: a la izquierda el `ContactForm`, a la derecha los datos de contacto
+- [x] Dos columnas: a la izquierda el `ContactForm`, a la derecha los datos de contacto
       (pendientes de Javier: dejar marcadores visibles `[pendiente]` en teléfono y email) y un
       botón de WhatsApp desactivado con un comentario `{/* TODO fase 3: número real */}`.
 
 ### `faq/page.tsx`
-- [ ] `Heading` + aviso `faq.pendingNote` en recuadro `bg-arena` + `Accordion` con `faq.items`.
+- [x] `Heading` + aviso `faq.pendingNote` en recuadro `bg-arena` + `Accordion` con `faq.items`.
 
 ### Páginas legales
-- [ ] Crear `legal/aviso-legal/page.tsx`, `legal/privacidad/page.tsx` y
+- [x] Crear `legal/aviso-legal/page.tsx`, `legal/privacidad/page.tsx` y
       `legal/cookies/page.tsx` como **esqueletos**: título, un párrafo que diga que el contenido
       está pendiente de los datos fiscales, y nada más. El texto legal completo se escribe en la
       fase 3, cuando Javier facilite razón social y NIF.
@@ -691,30 +709,72 @@ Contenido a escribir (⚠️ VERIFICAR todas las distancias antes de publicar):
 ## 1.7 Revisión responsive
 
 - [ ] Revisar cada página a 375 px, 768 px, 1024 px y 1440 px de ancho.
-- [ ] Comprobar que ninguna página produce scroll horizontal.
+      → Parcial: se ha medido mecánicamente (sin scroll horizontal, ver abajo) en una muestra
+      representativa de páginas y anchos con Chrome real vía CDP, no las 13 páginas × 4 anchos
+      una a una. **Falta el repaso visual** (que se vea bien, no solo que no desborde):
+      instrucciones en el resumen de esta sesión.
+- [x] Comprobar que ninguna página produce scroll horizontal.
+      → Verificado (`document.documentElement.scrollWidth <= innerWidth`) a 375/768/1440 px en
+      home, listado y ficha de apartamento, las 3 subpáginas de la zona, reservar, contacto,
+      faq y las dos rutas inglesas de prueba. Ninguna desborda. ✅
 - [ ] Comprobar que las imágenes mantienen su proporción y no se deforman.
-- [ ] Comprobar que la tarjeta pegajosa de la ficha de apartamento no se pega en móvil.
-- [ ] Comprobar que la tabla comparativa de `/reservar` se apila en móvil.
+      → No verificable de forma objetiva con los SVG de relleno actuales (aspect-ratio y
+      `object-cover` están aplicados en el código en todos los contenedores de imagen, así que
+      no debería haber distorsión, pero confirmarlo a simple vista requiere ojo humano y cobra
+      más sentido con fotos reales en la fase 2). Pendiente de tu repaso visual.
+- [x] Comprobar que la tarjeta pegajosa de la ficha de apartamento no se pega en móvil.
+      → Verificado: `position` computado es `static` a 375 px y `sticky` a 1280 px. ✅
+- [x] Comprobar que la tabla comparativa de `/reservar` se apila en móvil.
+      → Verificado: a 375 px la tabla tiene `display: none` y las tarjetas `display: block`; a
+      1024 px, al revés. ✅
 
 ---
 
 ## 1.8 Lista de verificación de cierre
 
-- [ ] `npm run build` y `npm run lint` pasan limpios.
-- [ ] Las 13 páginas existen y responden en `/es` y en `/en`.
-- [ ] Las URLs inglesas con slug traducido (`/en/apartments`, `/en/the-area/what-to-see`…)
-      responden 200 y conservan la URL en la barra de direcciones.
+- [x] `pnpm build` y `pnpm lint` pasan limpios. ✅
+- [x] Las 13 páginas existen y responden en `/es` y en `/en`.
+      → Verificado con `curl`: las 13 rutas × 2 idiomas responden 200 (más las 5 fichas de
+      apartamento × 2 idiomas). ✅
+- [x] Las URLs inglesas con slug traducido (`/en/apartments`, `/en/the-area/what-to-see`…)
+      responden 200 y conservan la URL en la barra de direcciones. ✅
 - [ ] Ningún texto visible está en el idioma equivocado. Recorrer la web entera en inglés.
-- [ ] Ningún texto está escrito directamente en un componente: todo sale de los diccionarios o
+      → No verificable del todo por mí: exige leer cada página en inglés con criterio humano.
+      Lo que sí puedo garantizar objetivamente: todos los textos de interfaz vienen de
+      `es.json`/`en.json` (misma forma exacta, 148 hojas, sin ninguna cadena escrita a mano en
+      los componentes de esta fase —comprobado por grep—) y todo el contenido editorial
+      (`src/data/apartamentos.ts`, `src/data/puntos-interes.ts`) tiene campo `en` propio, no
+      copiado del español. Instrucciones para tu repaso al final del resumen de esta sesión.
+- [x] Ningún texto está escrito directamente en un componente: todo sale de los diccionarios o
       de `src/data/`.
-- [ ] Los 5 apartamentos aparecen en el listado y sus 5 fichas cargan.
-- [ ] En las fichas **no** aparece ningún botón de Booking ni de Airbnb (porque las URLs son
+      → Verificado por grep: sin cadenas literales en JSX salvo `not-found.tsx` (fase 0,
+      deliberadamente sin dict) y separadores/símbolos (`/`, `·`, `€`). ✅
+- [x] Los 5 apartamentos aparecen en el listado y sus 5 fichas cargan.
+      → Verificado: `apartamento-1` … `apartamento-5` responden 200 (build generó 10 rutas
+      estáticas, 5 slugs × 2 idiomas). ✅
+- [x] En las fichas **no** aparece ningún botón de Booking ni de Airbnb (porque las URLs son
       `null`), sino el mensaje `bookPending`.
-- [ ] En las fichas aparece el aviso de licencia pendiente.
-- [ ] La galería se abre, navega con flechas, cierra con `Escape` y bloquea el scroll del fondo.
+      → Verificado en el HTML servido: 0 botones de plataforma, 1 aviso `bookPending`. ✅
+- [x] En las fichas aparece el aviso de licencia pendiente. → Verificado en el HTML servido. ✅
+- [x] La galería se abre, navega con flechas, cierra con `Escape` y bloquea el scroll del fondo.
+      → Verificado con clics y teclas reales simulados en Chrome (CDP): abre, contador "1 / 4",
+      `ArrowRight`/`ArrowLeft` cambian de imagen, `Escape` cierra, `body.style.overflow` pasa a
+      `hidden` al abrir. ✅
 - [ ] El acordeón de la FAQ funciona con teclado.
-- [ ] Todas las páginas de la guía de la zona muestran el aviso de información sin verificar.
-- [ ] Ninguna imagen carece de `alt`.
-- [ ] Se respetan las reglas de contraste de `plan.md` §2.
+      → Parcial: es un `<details>/<summary>` nativo sin JavaScript propio ni `preventDefault`,
+      por lo que el soporte de teclado (Enter/Espacio con foco) lo da el navegador, no el
+      código; he verificado que abre con clic (simulado por script) pero no he simulado la
+      secuencia real de teclado. Comprobación de 30 segundos recomendada, instrucciones abajo.
+- [x] Todas las páginas de la guía de la zona muestran el aviso de información sin verificar.
+      → Verificado en las 3 subpáginas (`que-ver`, `donde-comer`, `como-llegar`). ✅
+- [x] Ninguna imagen carece de `alt`. → Verificado por script sobre todos los `<Image>`. ✅
+- [x] Se respetan las reglas de contraste de `plan.md` §2.
+      → Verificado por grep: sin hex sueltos, sin `granito` ni `terracota-600` como texto sobre
+      fondo `arena`/`arena-light` en ningún componente de esta fase. ✅
 - [ ] Commit y despliegue en Vercel correctos.
+      → Pendiente: el código de esta fase está sin comitear todavía en el momento de escribir
+      esto. Instrucciones al final del resumen de esta sesión.
 - [ ] Marcada la fase 1 como completada en la tabla de [`../plan.md`](../plan.md).
+      *(No se marca como completada del todo: quedan pendientes el repaso visual en inglés, el
+      acordeón con teclado real y el despliegue en Vercel. La tabla de `plan.md` refleja este
+      estado intermedio.)*

@@ -11,7 +11,9 @@
     "cta": "Check availability",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "navLabel": "Main",
+    "mobileNavLabel": "Main mobile"
   },
   "footer": {
     "tagline": "Five apartments in the centre of Pozoblanco, in the heart of the Los Pedroches valley.",
@@ -29,6 +31,168 @@
   },
   "common": {
     "brand": "Apartamentos Orosio",
-    "city": "Pozoblanco, Córdoba"
+    "city": "Pozoblanco, Córdoba",
+    "breadcrumbLabel": "Breadcrumb"
+  },
+  "home": {
+    "heroTitle": "Apartments in the heart of Los Pedroches",
+    "heroSubtitle": "Five refurbished apartments in the centre of Pozoblanco, made for a getaway into the dehesa and for work stays alike.",
+    "heroCta": "See apartments",
+    "heroCtaSecondary": "Check availability",
+    "valuesTitle": "Why Orosio",
+    "values": [
+      {
+        "title": "In the centre of Pozoblanco",
+        "text": "Steps from shops, bars, the local hospital and the industrial estates. No need to take the car for everything."
+      },
+      {
+        "title": "A separate kitchen",
+        "text": "Properly equipped, not a corner with a microwave. Made for stays of several days."
+      },
+      {
+        "title": "Book direct, no commission",
+        "text": "The same apartment, a better price than on the platforms. What you save doesn't go to a middleman."
+      },
+      {
+        "title": "Direct contact with the owner",
+        "text": "No call centres or automated replies. You write, and whoever holds the keys answers."
+      }
+    ],
+    "apartmentsTitle": "Our apartments",
+    "apartmentsSubtitle": "Five one-bedroom apartments with a separate kitchen, all in the centre.",
+    "apartmentsCta": "See all five apartments",
+    "directTitle": "Book direct: same apartment, better price",
+    "directText": "When you book through Booking or Airbnb, part of what you pay stays with the platform. Booking here, that margin stays between you and us.",
+    "directPoints": [
+      "Better price than on the platforms",
+      "Flexibility to arrange check-in and check-out times",
+      "Direct contact by phone or WhatsApp"
+    ],
+    "directCta": "Request a direct booking",
+    "zoneTitle": "Los Pedroches is closer than you think",
+    "zoneText": "Holm oak dehesa as far as the eye can see, granite villages, castles and Córdoba's finest acorn-fed Iberian ham. Pozoblanco is the gateway to the valley.",
+    "zoneCta": "Discover the area",
+    "finalCtaTitle": "Already know when you're coming?",
+    "finalCtaText": "Tell us your dates and we'll confirm availability and price.",
+    "finalCtaButton": "Check availability"
+  },
+  "apartments": {
+    "title": "Apartments",
+    "intro": "Five one-bedroom apartments with a separate kitchen in the centre of Pozoblanco. All with the same layout and the same amenities.",
+    "from": "From",
+    "perNight": "per night",
+    "viewDetail": "View apartment",
+    "guests": "guests",
+    "bedrooms": "bedroom",
+    "bedroomsPlural": "bedrooms",
+    "bathrooms": "bathroom",
+    "bathroomsPlural": "bathrooms",
+    "surface": "m²"
+  },
+  "apartment": {
+    "backToList": "All apartments",
+    "aboutTitle": "The apartment",
+    "amenitiesTitle": "Amenities",
+    "galleryTitle": "Gallery",
+    "bookTitle": "Book this apartment",
+    "bookDirect": "Request a direct booking",
+    "bookBooking": "View on Booking",
+    "bookAirbnb": "View on Airbnb",
+    "bookPending": "We're still finishing setting up this apartment on the platforms. In the meantime, write to us and we'll confirm availability.",
+    "licence": "Andalusian Tourism Registry",
+    "licencePending": "Registration number pending publication.",
+    "galleryOpen": "Enlarge image",
+    "galleryClose": "Close",
+    "galleryPrev": "Previous image",
+    "galleryNext": "Next image"
+  },
+  "zone": {
+    "title": "The area",
+    "intro": "Pozoblanco is the capital of Los Pedroches, a dehesa valley in the north of the province of Córdoba. Here's what you can do if you're staying a few days.",
+    "seeTitle": "What to see",
+    "seeIntro": "What's worth a visit in the valley and around it.",
+    "eatTitle": "Where to eat",
+    "eatIntro": "Los Pedroches is the land of acorn-fed Iberian ham and hearty stews.",
+    "getThereTitle": "How to get here",
+    "getThereIntro": "Pozoblanco is well connected by road to Córdoba, Madrid and Extremadura.",
+    "readMore": "Read more",
+    "unverified": "Indicative information pending verification."
+  },
+  "book": {
+    "title": "Book",
+    "intro": "Tell us your dates and we'll get back to you with availability and price. You can also book through the usual platforms.",
+    "directTitle": "Direct booking",
+    "directText": "It's the cheapest option for you, and it lets us be flexible with timings.",
+    "channelsTitle": "Or book on the platforms",
+    "channelsText": "If you'd rather book where you already have an account, we're there too.",
+    "comparisonTitle": "What changes depending on where you book",
+    "comparisonDirect": "Direct booking",
+    "comparisonPlatforms": "Booking / Airbnb",
+    "comparisonRows": [
+      { "label": "Price", "direct": "The lowest", "platforms": "Includes the platform's commission" },
+      { "label": "Check-in and check-out times", "direct": "Negotiable", "platforms": "Fixed in the listing" },
+      { "label": "Support", "direct": "Direct with the owner", "platforms": "Through the platform" },
+      { "label": "Payment", "direct": "Arranged with you", "platforms": "As set by the platform" }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Write to us and we'll reply as soon as we can. If you'd rather, you can also call us or send a WhatsApp message.",
+    "formTitle": "Write to us",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "dates": "Approximate dates",
+    "guests": "Number of guests",
+    "message": "Message",
+    "send": "Send",
+    "required": "Required field",
+    "placeholderName": "What's your name",
+    "placeholderEmail": "you@email.com",
+    "placeholderPhone": "Optional",
+    "placeholderDates": "For example: 12 to 15 April",
+    "placeholderMessage": "Tell us what you need to know",
+    "directTitle": "Direct contact",
+    "whatsapp": "Write on WhatsApp",
+    "notWorking": "The form isn't connected yet. It goes live in phase 3."
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "intro": "What people most often ask before booking.",
+    "items": [
+      {
+        "q": "What time can I check in and out?",
+        "a": "Check-in is from 4pm and check-out before 11am. If you book directly with us, we can adjust the times depending on occupancy."
+      },
+      {
+        "q": "Do I have to pay a deposit?",
+        "a": "Still to be confirmed. We'll state it here before opening direct bookings."
+      },
+      {
+        "q": "Are pets allowed?",
+        "a": "Still to be confirmed."
+      },
+      {
+        "q": "Is there wifi?",
+        "a": "Yes, all apartments include wifi in the price."
+      },
+      {
+        "q": "Is there anywhere to park?",
+        "a": "Still to be confirmed."
+      },
+      {
+        "q": "Is smoking allowed?",
+        "a": "No. All apartments are non-smoking."
+      },
+      {
+        "q": "Can I book for a single night?",
+        "a": "The minimum stay per season is still to be confirmed."
+      },
+      {
+        "q": "What happens if I need to cancel?",
+        "a": "The cancellation policy for direct bookings is still to be defined. On Booking and Airbnb, the one stated in each listing applies."
+      }
+    ],
+    "pendingNote": "Some answers are still to be confirmed. They'll be completed before the website goes live."
   }
 }

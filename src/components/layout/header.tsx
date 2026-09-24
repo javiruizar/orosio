@@ -26,7 +26,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           Apartamentos <span className="text-terracota-600">Orosio</span>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-7 md:flex" aria-label={dict.header.navLabel}>
           {links.map((link) => (
             <Link
               key={link.href}
@@ -45,6 +45,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </Button>
           <MobileNav
             links={links}
+            navLabel={dict.header.mobileNavLabel}
             openLabel={dict.header.openMenu}
             closeLabel={dict.header.closeMenu}
             ctaHref={routes.book(locale)}
