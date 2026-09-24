@@ -216,8 +216,12 @@ export default function robots(): MetadataRoute.Robots {
 - [ ] Crear `src/app/[locale]/opengraph-image.tsx` usando `ImageResponse` de `next/og`, de
       1200×630, con: fondo `#FAF7F2`, franja inferior `#B85C38`, el texto "Apartamentos Orosio"
       en grande y "Pozoblanco · Los Pedroches" debajo en `#6E6B66`.
+      **Nota (Next.js 16)**: la función de imagen recibe `params` como una **promesa**
+      (`{ params }: { params: Promise<{ locale: string }> }`, con `await`), a diferencia de Next
+      15 donde llegaba ya resuelto.
 - [ ] Para las fichas de apartamento, usar la **primera foto de la galería** como imagen Open
-      Graph en lugar de la generada. Si la galería está vacía, caer a la genérica.
+      Graph en lugar de la generada. Si la galería está vacía, caer a la genérica. Mismo aviso:
+      `params` (y `id`, si se usa `generateImageMetadata`) llegan como promesas.
 - [ ] Comprobar el resultado pegando una URL en el validador de LinkedIn o en un chat de
       WhatsApp con la web ya desplegada.
 

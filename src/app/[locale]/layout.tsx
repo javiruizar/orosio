@@ -45,7 +45,11 @@ export default async function LocaleLayout({
   const dict = await getDictionary(locale);
 
   return (
-    <html lang={localeHtmlLang[locale]} className={`${fraunces.variable} ${inter.variable}`}>
+    <html
+      lang={localeHtmlLang[locale]}
+      data-scroll-behavior="smooth"
+      className={`${fraunces.variable} ${inter.variable}`}
+    >
       <body className="flex min-h-screen flex-col">
         <a
           href="#contenido"

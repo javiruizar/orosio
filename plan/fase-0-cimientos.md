@@ -17,9 +17,12 @@ marketing ni imágenes reales. Eso es la fase 1.
 
 ## 0.1 Comprobación del entorno
 
-- [ ] Ejecutar `node --version`. **Debe ser 20.x o superior.** Si es menor, parar y avisar.
-- [ ] Ejecutar `npm --version` y `git --version` para confirmar que están disponibles.
+- [x] Ejecutar `node --version`. **Debe ser 20.x o superior.** Si es menor, parar y avisar.
+      → **v20.19.3** ✅
+- [x] Ejecutar `npm --version` y `git --version` para confirmar que están disponibles.
+      → npm 10.8.2, git 2.53.0 (además, pnpm 11.5.2: el proyecto usa pnpm, ver nota en 0.2). ✅
 - [ ] Confirmar que la raíz del proyecto contiene solo `plan.md` y la carpeta `plan/`.
+      → No verificable a posteriori: el proyecto ya se generó sobre esta carpeta. Sin consecuencias.
 
 ---
 
@@ -28,7 +31,11 @@ marketing ni imágenes reales. Eso es la fase 1.
 `create-next-app` se niega a instalar en un directorio que ya tiene archivos. Por eso se genera
 en una carpeta temporal y se mueve el contenido a la raíz.
 
-- [ ] Generar el proyecto en una carpeta temporal:
+> **Nota (2026-09-24)**: el proyecto usa **pnpm**, no npm (hay `pnpm-lock.yaml` y
+> `pnpm-workspace.yaml`; no hay `package-lock.json`). Todos los `npm install` / `npm run` de este
+> documento y de los siguientes deben leerse como `pnpm add` / `pnpm <script>`. Ver CLAUDE.md.
+
+- [x] Generar el proyecto en una carpeta temporal:
 
 ```bash
 cd /home/javierruiz/Documentos/proyectos/orosio
@@ -44,7 +51,7 @@ npx create-next-app@latest .tmp-app \
   --yes
 ```
 
-- [ ] Mover todo el contenido generado a la raíz y borrar la carpeta temporal:
+- [x] Mover todo el contenido generado a la raíz y borrar la carpeta temporal:
 
 ```bash
 cd /home/javierruiz/Documentos/proyectos/orosio
@@ -52,12 +59,12 @@ mv .tmp-app/* .tmp-app/.* . 2>/dev/null || true
 rmdir .tmp-app
 ```
 
-- [ ] Comprobar que en la raíz existen ahora: `package.json`, `next.config.ts`, `tsconfig.json`,
+- [x] Comprobar que en la raíz existen ahora: `package.json`, `next.config.ts`, `tsconfig.json`,
       `src/app/`, `public/`, `.gitignore`, y que **siguen** estando `plan.md` y `plan/`.
 
 ### Verificar la versión de Tailwind
 
-- [ ] Abrir `package.json` y mirar la versión de `tailwindcss`.
+- [x] Abrir `package.json` y mirar la versión de `tailwindcss`. → **v4 confirmado** ✅
   - **Si es `^4.x`** (lo esperado): seguir con el documento tal cual.
   - **Si es `^3.x`**: parar y avisar. Este plan está escrito para Tailwind v4, cuya configuración
     es CSS-first (`@theme` dentro del CSS) y no usa `tailwind.config.ts`. Habría que adaptar los
@@ -67,7 +74,7 @@ rmdir .tmp-app
 
 ## 0.3 Repositorio git
 
-- [ ] Inicializar el repositorio (`create-next-app` puede haberlo hecho ya; si existe `.git`,
+- [x] Inicializar el repositorio (`create-next-app` puede haberlo hecho ya; si existe `.git`,
       saltar este comando):
 
 ```bash
@@ -75,7 +82,7 @@ cd /home/javierruiz/Documentos/proyectos/orosio
 git init -b main
 ```
 
-- [ ] Añadir al final de `.gitignore` las siguientes líneas:
+- [x] Añadir al final de `.gitignore` las siguientes líneas:
 
 ```
 # Entorno
@@ -90,7 +97,7 @@ git init -b main
 .DS_Store
 ```
 
-- [ ] Primer commit:
+- [x] Primer commit:
 
 ```bash
 git add -A
@@ -101,7 +108,7 @@ git commit -m "Fase 0: proyecto Next.js inicial"
 
 ## 0.4 Tokens de diseño en Tailwind
 
-- [ ] **Sustituir por completo** el contenido de `src/app/globals.css` por:
+- [x] **Sustituir por completo** el contenido de `src/app/globals.css` por:
 
 ```css
 @import "tailwindcss";
@@ -186,7 +193,7 @@ en ningún otro sitio ni crear `tailwind.config.ts`.
 
 ## 0.5 Estructura de carpetas
 
-- [ ] Crear estas carpetas vacías dentro de `src/`:
+- [x] Crear estas carpetas vacías dentro de `src/`:
 
 ```
 src/
@@ -200,17 +207,17 @@ src/
 └─ lib/                  ← utilidades
 ```
 
-- [ ] Borrar `src/app/page.tsx` y `src/app/layout.tsx` que generó `create-next-app`.
+- [x] Borrar `src/app/page.tsx` y `src/app/layout.tsx` que generó `create-next-app`.
       Se sustituyen por versiones dentro de `[locale]` en los pasos siguientes.
-- [ ] Borrar `src/app/favicon.ico` **no**: se conserva.
-- [ ] Vaciar la carpeta `public/` de los SVG de ejemplo de Next.js
+- [x] Borrar `src/app/favicon.ico` **no**: se conserva.
+- [x] Vaciar la carpeta `public/` de los SVG de ejemplo de Next.js
       (`next.svg`, `vercel.svg`, `file.svg`, `globe.svg`, `window.svg`).
 
 ---
 
 ## 0.6 Configuración de idiomas
 
-- [ ] Crear `src/i18n/config.ts`:
+- [x] Crear `src/i18n/config.ts`:
 
 ```ts
 export const locales = ["es", "en"] as const;
@@ -236,7 +243,7 @@ export function isLocale(value: string): value is Locale {
 }
 ```
 
-- [ ] Crear `src/i18n/dictionaries/es.json`. En la fase 0 solo contiene lo que usan la cabecera y
+- [x] Crear `src/i18n/dictionaries/es.json`. En la fase 0 solo contiene lo que usan la cabecera y
       el pie; la fase 1 lo ampliará:
 
 ```json
@@ -276,7 +283,7 @@ export function isLocale(value: string): value is Locale {
 }
 ```
 
-- [ ] Crear `src/i18n/dictionaries/en.json` con **exactamente las mismas claves**:
+- [x] Crear `src/i18n/dictionaries/en.json` con **exactamente las mismas claves**:
 
 ```json
 {
@@ -315,7 +322,7 @@ export function isLocale(value: string): value is Locale {
 }
 ```
 
-- [ ] Crear `src/i18n/get-dictionary.ts`:
+- [x] Crear `src/i18n/get-dictionary.ts`:
 
 ```ts
 import "server-only";
@@ -334,7 +341,7 @@ export async function getDictionary(locale: Locale): Promise<Dictionary> {
 }
 ```
 
-- [ ] Instalar la dependencia que exige `import "server-only"`:
+- [x] Instalar la dependencia que exige `import "server-only"`:
 
 ```bash
 npm install server-only
@@ -350,7 +357,12 @@ exactamente las mismas claves: si falta una, TypeScript no avisa pero la web mos
 
 Su única función es que quien entre en `/` o en una ruta sin idioma acabe en `/es`.
 
-- [ ] Crear `src/middleware.ts`:
+- [x] Crear `src/proxy.ts` (en Next.js 16 `middleware` se renombró a `proxy`):
+
+> **Nota (2026-09-24)**: En Next.js 16, la convención `middleware.ts` fue deprecada y
+> renombrada a `proxy.ts`, con la función exportada como `proxy`. El plan original
+> mencionaba `middleware.ts` porque se escribió para Next.js 15, pero el proyecto usa
+> Next.js 16.3.6 y ya está implementado correctamente como `proxy.ts`. ✅
 
 ```ts
 import { NextResponse } from "next/server";
@@ -358,7 +370,7 @@ import type { NextRequest } from "next/server";
 
 import { defaultLocale, locales } from "@/i18n/config";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const hasLocale = locales.some(
@@ -387,7 +399,7 @@ export const config = {
 una **promesa**. Hay que declararla como `Promise<{ locale: string }>` y hacerle `await`.
 Olvidarlo es el error más frecuente al portar código de versiones anteriores.
 
-- [ ] Crear `src/app/[locale]/layout.tsx`:
+- [x] Crear `src/app/[locale]/layout.tsx`:
 
 ```tsx
 import type { Metadata } from "next";
@@ -437,7 +449,11 @@ export default async function LocaleLayout({
   const dict = await getDictionary(locale);
 
   return (
-    <html lang={localeHtmlLang[locale]} className={`${fraunces.variable} ${inter.variable}`}>
+    <html
+      lang={localeHtmlLang[locale]}
+      data-scroll-behavior="smooth"
+      className={`${fraunces.variable} ${inter.variable}`}
+    >
       <body className="flex min-h-screen flex-col">
         <a
           href="#contenido"
@@ -456,7 +472,13 @@ export default async function LocaleLayout({
 }
 ```
 
-- [ ] Crear `src/app/[locale]/page.tsx` como marcador temporal. **La fase 1 lo reemplaza entero**:
+> **Nota (2026-09-24)**: se ha añadido `data-scroll-behavior="smooth"` al `<html>`, que no estaba
+> en el plan original. En Next.js 16 el framework ya no neutraliza automáticamente el
+> `scroll-behavior: smooth` de `globals.css` durante la navegación entre páginas; sin este
+> atributo, cada cambio de página produce un scroll animado hasta arriba en vez del salto
+> instantáneo esperado. ✅
+
+- [x] Crear `src/app/[locale]/page.tsx` como marcador temporal. **La fase 1 lo reemplaza entero**:
 
 ```tsx
 import { Container } from "@/components/ui/container";
@@ -473,7 +495,7 @@ export default function HomePage() {
 }
 ```
 
-- [ ] Crear `src/app/not-found.tsx` (página 404 global, sin idioma):
+- [x] Crear `src/app/not-found.tsx` (página 404 global, sin idioma):
 
 ```tsx
 import Link from "next/link";
@@ -508,13 +530,13 @@ export default function NotFound() {
 
 ## 0.9 Utilidad `cn`
 
-- [ ] Instalar dependencias:
+- [x] Instalar dependencias:
 
 ```bash
 npm install clsx tailwind-merge
 ```
 
-- [ ] Crear `src/lib/cn.ts`:
+- [x] Crear `src/lib/cn.ts`:
 
 ```ts
 import { clsx, type ClassValue } from "clsx";
@@ -530,7 +552,7 @@ export function cn(...inputs: ClassValue[]) {
 
 ## 0.10 Componentes de interfaz
 
-- [ ] Crear `src/components/ui/container.tsx`:
+- [x] Crear `src/components/ui/container.tsx`:
 
 ```tsx
 import { cn } from "@/lib/cn";
@@ -550,7 +572,7 @@ export function Container({
 }
 ```
 
-- [ ] Crear `src/components/ui/section.tsx`:
+- [x] Crear `src/components/ui/section.tsx`:
 
 ```tsx
 import { Container } from "./container";
@@ -581,7 +603,7 @@ export function Section({
 }
 ```
 
-- [ ] Crear `src/components/ui/button.tsx`. Es un componente polimórfico: si recibe `href`
+- [x] Crear `src/components/ui/button.tsx`. Es un componente polimórfico: si recibe `href`
       renderiza un `Link` de Next, y si no, un `button`.
 
 ```tsx
@@ -654,7 +676,7 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
 }
 ```
 
-- [ ] Crear `src/components/ui/card.tsx`:
+- [x] Crear `src/components/ui/card.tsx`:
 
 ```tsx
 import { cn } from "@/lib/cn";
@@ -683,7 +705,7 @@ export function Card({
 
 ## 0.11 Rutas y navegación
 
-- [ ] Crear `src/lib/routes.ts`. **Todos los enlaces internos de la web deben pasar por aquí**;
+- [x] Crear `src/lib/routes.ts`. **Todos los enlaces internos de la web deben pasar por aquí**;
       así, si un día cambian los slugs, solo se toca este archivo:
 
 ```ts
@@ -732,13 +754,13 @@ SEO es mejor que repetir el slug español en inglés. Las carpetas de `src/app/[
 
 ## 0.12 Cabecera, pie y selector de idioma
 
-- [ ] Instalar los iconos:
+- [x] Instalar los iconos:
 
 ```bash
 npm install lucide-react
 ```
 
-- [ ] Crear `src/components/layout/locale-switcher.tsx` (componente de cliente: necesita conocer
+- [x] Crear `src/components/layout/locale-switcher.tsx` (componente de cliente: necesita conocer
       la ruta actual para no perderla al cambiar de idioma):
 
 ```tsx
@@ -783,7 +805,7 @@ export function LocaleSwitcher({ locale, label }: { locale: Locale; label: strin
 }
 ```
 
-- [ ] Crear `src/components/layout/header.tsx`:
+- [x] Crear `src/components/layout/header.tsx`:
 
 ```tsx
 import Link from "next/link";
@@ -845,7 +867,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 }
 ```
 
-- [ ] Crear `src/components/layout/mobile-nav.tsx`:
+- [x] Crear `src/components/layout/mobile-nav.tsx`:
 
 ```tsx
 "use client";
@@ -914,7 +936,13 @@ export function MobileNav({
 }
 ```
 
-- [ ] Crear `src/components/layout/footer.tsx`:
+> **Nota (2026-09-24)**: la implementación real de `mobile-nav.tsx` cierra el menú con `onClick`
+> en cada enlace en lugar del `useEffect` sobre `pathname` de este documento (mismo resultado,
+> evita una dependencia de `usePathname` en un componente que no la necesitaba para nada más).
+> `button.tsx` incluye además un `// eslint-disable-next-line` en la desestructuración de props no
+> usadas, que este documento no menciona. Ninguna de las dos diferencias afecta al comportamiento.
+
+- [x] Crear `src/components/layout/footer.tsx`:
 
 ```tsx
 import Link from "next/link";
@@ -1005,25 +1033,31 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 - [ ] Arrancar el servidor de desarrollo:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
-- [ ] Abrir `http://localhost:3000` y comprobar que **redirige a `/es`**.
-- [ ] Comprobar que `http://localhost:3000/en` carga con la navegación en inglés.
+- [x] Abrir `http://localhost:3000` y comprobar que **redirige a `/es`**.
+      → Verificado con `curl` sobre la build de producción: `/` responde 307 a `/es`. ✅
+- [x] Comprobar que `http://localhost:3000/en` carga con la navegación en inglés.
+      → Verificado con `curl`: `/en` responde 200, `lang="en-GB"`, textos en inglés. ✅
 - [ ] Pulsar `EN` y `ES` en el selector y confirmar que se mantiene en la misma página.
 - [ ] Reducir la ventana por debajo de 768 px y confirmar que aparece el menú hamburguesa,
       que se abre, que se cierra y que al navegar se cierra solo.
-- [ ] Tabular con el teclado desde el principio de la página: el primer foco debe ser el enlace
+- [x] Tabular con el teclado desde el principio de la página: el primer foco debe ser el enlace
       "Saltar al contenido", visible sobre fondo terracota.
+      → Verificado por Javier en el navegador (2026-09-24). En pulsaciones de Tab posteriores
+      desde la barra de direcciones, el foco puede caer en la búsqueda contextual del propio
+      navegador (Chrome/Edge); es comportamiento del navegador, no de la web, y no invalida
+      la prueba. ✅
 - [ ] Comprobar que los titulares se ven en serif (Fraunces) y el texto en sans (Inter).
-- [ ] Parar el servidor y verificar que la compilación de producción pasa sin errores:
+- [x] Parar el servidor y verificar que la compilación de producción pasa sin errores:
 
 ```bash
-npm run build
-npm run lint
+pnpm build
+pnpm lint
 ```
 
-Si `npm run build` falla, **no continuar**: arreglar el error antes de desplegar.
+Si `pnpm build` falla, **no continuar**: arreglar el error antes de desplegar.
 
 ---
 
@@ -1032,8 +1066,9 @@ Si `npm run build` falla, **no continuar**: arreglar el error antes de desplegar
 Este paso necesita cuentas de Javier. Si no están disponibles, dejarlo pendiente y avisar;
 el resto de la fase 0 se da por buena igualmente.
 
-- [ ] Crear un repositorio vacío en GitHub llamado `orosio` (privado).
-- [ ] Conectarlo y subir el código:
+- [x] Crear un repositorio vacío en GitHub llamado `orosio` (privado).
+      → `github.com/javiruizar/orosio`. ✅
+- [x] Conectarlo y subir el código:
 
 ```bash
 git remote add origin git@github.com:<usuario>/orosio.git
@@ -1041,6 +1076,8 @@ git add -A
 git commit -m "Fase 0: identidad visual, i18n y componentes base"
 git push -u origin main
 ```
+
+      → `main` sincronizado con `origin/main`. ✅
 
 - [ ] En [vercel.com](https://vercel.com), "Add New → Project", importar el repositorio.
       Todos los ajustes por defecto son correctos: Vercel detecta Next.js solo.
@@ -1058,15 +1095,24 @@ URL de producción: ______________________________
 
 No dar la fase por terminada hasta que todo esto se cumpla:
 
-- [ ] `npm run build` termina sin errores ni avisos de TypeScript.
-- [ ] `npm run lint` termina limpio.
-- [ ] `/` redirige a `/es`; `/es` y `/en` funcionan.
-- [ ] El selector de idioma conserva la página actual.
-- [ ] La cabecera es pegajosa y el menú móvil funciona.
-- [ ] Los colores usados coinciden con los tokens; no hay ningún hexadecimal suelto en los
+- [x] `pnpm build` termina sin errores ni avisos de TypeScript. ✅
+- [x] `pnpm lint` termina limpio. ✅
+- [x] `/` redirige a `/es`; `/es` y `/en` funcionan.
+      → Verificado con `curl` sobre la build de producción. ✅
+- [ ] El selector de idioma conserva la página actual. *(pendiente de verificación en navegador)*
+- [ ] La cabecera es pegajosa y el menú móvil funciona. *(pendiente de verificación en navegador)*
+- [x] Los colores usados coinciden con los tokens; no hay ningún hexadecimal suelto en los
       componentes salvo en `not-found.tsx`, que va sin Tailwind a propósito.
-- [ ] No se ha usado `granito` como texto sobre fondo `arena` ni `arena-light`.
-- [ ] `es.json` y `en.json` tienen exactamente las mismas claves.
-- [ ] Todos los enlaces internos pasan por `routes` de `src/lib/routes.ts`.
-- [ ] Commit hecho y, si hubo acceso a las cuentas, despliegue en Vercel verde.
+      → Verificado con grep sobre `src/`. ✅
+- [x] No se ha usado `granito` como texto sobre fondo `arena` ni `arena-light`.
+      → Verificado con grep sobre `src/`. ✅
+- [x] `es.json` y `en.json` tienen exactamente las mismas claves.
+      → Verificado por script (22 claves de primer nivel, mismo conjunto anidado). ✅
+- [x] Todos los enlaces internos pasan por `routes` de `src/lib/routes.ts`.
+      → Verificado con grep: ningún `href` literal fuera de `not-found.tsx`. ✅
+- [x] Commit hecho y subido a GitHub (`javiruizar/orosio`, rama `main`, sincronizada con
+      `origin/main`). Despliegue en Vercel: pendiente (ver 0.14).
 - [ ] Marcada la fase 0 como completada en la tabla de [`../plan.md`](../plan.md).
+      *(No se marca como completada del todo: quedan pendientes las comprobaciones de navegador
+      de este punto y el despliegue en Vercel de 0.14. La tabla de `plan.md` refleja este estado
+      intermedio.)*

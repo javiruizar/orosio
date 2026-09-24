@@ -12,7 +12,7 @@ El detalle de ejecución paso a paso vive en archivos separados, uno por fase:
 
 | Fase | Documento de ejecución | Estado |
 |---|---|---|
-| 0 — Cimientos | [`plan/fase-0-cimientos.md`](plan/fase-0-cimientos.md) | Pendiente |
+| 0 — Cimientos | [`plan/fase-0-cimientos.md`](plan/fase-0-cimientos.md) | 🟡 Código completo; pendiente verificación en navegador y Vercel |
 | 1 — Maqueta completa | [`plan/fase-1-maqueta.md`](plan/fase-1-maqueta.md) | Pendiente |
 | 2 — Sanity | [`plan/fase-2-sanity.md`](plan/fase-2-sanity.md) | Pendiente |
 | 3 — Conversión y SEO | [`plan/fase-3-conversion-seo.md`](plan/fase-3-conversion-seo.md) | Pendiente |
@@ -57,7 +57,8 @@ Objetivos, por orden:
 
 | Tema | Decisión |
 |---|---|
-| Framework | Next.js 15 (App Router) + TypeScript |
+| Framework | Next.js 16 (App Router) + TypeScript |
+| Gestor de paquetes | pnpm |
 | Estilos | Tailwind CSS v4 |
 | CMS | Sanity, studio embebido en `/studio` |
 | Idiomas | Español + Inglés (rutas `/es` y `/en`) |
@@ -210,9 +211,11 @@ que a efectos prácticos elimina el overbooking. Con iCal, de horas.
 ### 5.3 Qué hay que construir en la web
 
 - `GET /api/availability/[slug]` — disponibilidad y precios por rango de fechas, leídos del CM.
-  Cacheado con `unstable_cache` y etiqueta `availability:[slug]`.
+  Cacheado con la directiva `"use cache"` y `cacheTag("availability:[slug]")` (API de caché de
+  Next.js 16; sustituye a `unstable_cache`, desaconsejado en esta versión).
 - `POST /api/webhooks/channel-manager` — recibe los avisos de cambio del CM y llama a
-  `revalidateTag()`. Es lo que hace que la web se entere al instante. Firma verificada.
+  `revalidateTag(tag, "max")` (Next.js 16 exige el segundo argumento; la forma de un solo
+  argumento está deprecada). Es lo que hace que la web se entere al instante. Firma verificada.
 - **Vercel Cron cada 15 min** — refresco de seguridad por si se pierde un webhook.
 - `POST /api/bookings` — crea la reserva en el CM tras el pago.
 - **Bloqueo temporal (hold) de 15 min** cuando el huésped entra en el checkout, para que nadie

@@ -44,6 +44,9 @@ SANITY_API_READ_TOKEN=
 ```
 
 - [ ] Crear también `.env.example` con las mismas claves y valores vacíos. Este **sí** se sube.
+      **Atención**: el `.gitignore` de este proyecto usa el patrón `.env*` (de `create-next-app`),
+      que también ignora `.env.example`. Añadir la excepción `!.env.example` al `.gitignore` antes
+      de hacer `git add`, o el fichero de ejemplo nunca llegará a subirse.
 - [ ] En [sanity.io/manage](https://sanity.io/manage), dentro del proyecto, en *API → CORS
       origins*, añadir `http://localhost:3000` y la URL de producción de Vercel, ambas con
       credenciales permitidas.
@@ -737,8 +740,11 @@ Sin esto, Javier edita en el studio y la web tarda hasta 60 segundos en reflejar
 páginas estáticas cacheadas.
 
 - [ ] Crear `src/app/api/revalidate/route.ts` usando `parseBody` de `next-sanity/webhook`, que
-      verifica la firma del webhook. Al recibir un cambio, llamar a `revalidateTag()` con la
-      etiqueta que corresponda al `_type` del documento modificado.
+      verifica la firma del webhook. Al recibir un cambio, llamar a `revalidateTag(tag, "max")`
+      con la etiqueta que corresponda al `_type` del documento modificado. **Nota (Next.js 16)**:
+      la forma de un solo argumento `revalidateTag(tag)` está deprecada; hay que pasar siempre el
+      segundo parámetro (`"max"` para invalidar el máximo alcance, equivalente al comportamiento
+      antiguo).
 - [ ] Generar un secreto aleatorio y guardarlo en `.env.local` y en las variables de entorno de
       Vercel como `SANITY_REVALIDATE_SECRET`.
 - [ ] En sanity.io/manage → *API → Webhooks*, crear un webhook:

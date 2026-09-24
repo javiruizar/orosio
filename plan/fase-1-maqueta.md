@@ -28,6 +28,28 @@ Dos advertencias:
 
 ---
 
+## 1.0 Correcciones heredadas de la fase 0
+
+Dos problemas detectados en el código de la fase 0 que esta fase debe corregir de paso, porque
+las páginas nuevas los harían visibles:
+
+- [ ] **`LocaleSwitcher` no traduce el slug.** Hoy sustituye solo el primer segmento de la ruta
+      (`/es/xxx` → `/en/xxx`), lo que rompe en cuanto los slugs difieren entre idiomas: desde
+      `/en/apartments` llevaría a `/es/apartments` (404, el slug español es `apartamentos`), y
+      desde `/es/la-zona` a `/en/la-zona` (404, el slug inglés es `the-area`). Hay que reescribir
+      `pathFor()` en `src/components/layout/locale-switcher.tsx` para que reconozca la página
+      actual y use `routes.ts` para construir la URL en el idioma destino, no una sustitución de
+      texto. Si la ruta no se puede mapear (por ejemplo, una página 404), caer a la home del
+      idioma destino en lugar de a una URL rota.
+- [ ] **Textos de interfaz escritos a mano en español.** `aria-label="Principal"` (en
+      `header.tsx`) y `aria-label="Principal móvil"` (en `mobile-nav.tsx`) están fijos en español
+      y se ven también en `/en`, incumpliendo la regla de esta fase de que ningún texto salga
+      directamente de un componente. Añadir las claves correspondientes (p. ej.
+      `header.navLabel`, `header.mobileNavLabel`) a `es.json` y `en.json` y usarlas en vez del
+      texto literal.
+
+---
+
 ## 1.1 URLs en inglés mediante rewrites
 
 - [ ] **Sustituir por completo** `next.config.ts` por:
