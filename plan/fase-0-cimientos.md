@@ -1040,16 +1040,19 @@ pnpm dev
       → Verificado con `curl` sobre la build de producción: `/` responde 307 a `/es`. ✅
 - [x] Comprobar que `http://localhost:3000/en` carga con la navegación en inglés.
       → Verificado con `curl`: `/en` responde 200, `lang="en-GB"`, textos en inglés. ✅
-- [ ] Pulsar `EN` y `ES` en el selector y confirmar que se mantiene en la misma página.
-- [ ] Reducir la ventana por debajo de 768 px y confirmar que aparece el menú hamburguesa,
+- [x] Pulsar `EN` y `ES` en el selector y confirmar que se mantiene en la misma página.
+      → Verificado por Javier en el navegador (2026-09-24). ✅
+- [x] Reducir la ventana por debajo de 768 px y confirmar que aparece el menú hamburguesa,
       que se abre, que se cierra y que al navegar se cierra solo.
+      → Verificado por Javier en el navegador (2026-09-24). ✅
 - [x] Tabular con el teclado desde el principio de la página: el primer foco debe ser el enlace
       "Saltar al contenido", visible sobre fondo terracota.
       → Verificado por Javier en el navegador (2026-09-24). En pulsaciones de Tab posteriores
       desde la barra de direcciones, el foco puede caer en la búsqueda contextual del propio
       navegador (Chrome/Edge); es comportamiento del navegador, no de la web, y no invalida
       la prueba. ✅
-- [ ] Comprobar que los titulares se ven en serif (Fraunces) y el texto en sans (Inter).
+- [x] Comprobar que los titulares se ven en serif (Fraunces) y el texto en sans (Inter).
+      → Verificado por Javier en el navegador (2026-09-24). ✅
 - [x] Parar el servidor y verificar que la compilación de producción pasa sin errores:
 
 ```bash
@@ -1099,8 +1102,10 @@ No dar la fase por terminada hasta que todo esto se cumpla:
 - [x] `pnpm lint` termina limpio. ✅
 - [x] `/` redirige a `/es`; `/es` y `/en` funcionan.
       → Verificado con `curl` sobre la build de producción. ✅
-- [ ] El selector de idioma conserva la página actual. *(pendiente de verificación en navegador)*
-- [ ] La cabecera es pegajosa y el menú móvil funciona. *(pendiente de verificación en navegador)*
+- [x] El selector de idioma conserva la página actual.
+      → Verificado por Javier en el navegador (2026-09-24). ✅
+- [x] La cabecera es pegajosa y el menú móvil funciona.
+      → Verificado por Javier en el navegador (2026-09-24). ✅
 - [x] Los colores usados coinciden con los tokens; no hay ningún hexadecimal suelto en los
       componentes salvo en `not-found.tsx`, que va sin Tailwind a propósito.
       → Verificado con grep sobre `src/`. ✅
@@ -1113,6 +1118,6 @@ No dar la fase por terminada hasta que todo esto se cumpla:
 - [x] Commit hecho y subido a GitHub (`javiruizar/orosio`, rama `main`, sincronizada con
       `origin/main`). Despliegue en Vercel: pendiente (ver 0.14).
 - [ ] Marcada la fase 0 como completada en la tabla de [`../plan.md`](../plan.md).
-      *(No se marca como completada del todo: quedan pendientes las comprobaciones de navegador
-      de este punto y el despliegue en Vercel de 0.14. La tabla de `plan.md` refleja este estado
-      intermedio.)*
+      *(No se marca como completada del todo: solo queda pendiente el despliegue en Vercel de
+      0.14 — todas las comprobaciones de navegador ya están hechas. La tabla de `plan.md` refleja
+      este estado intermedio.)*
